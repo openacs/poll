@@ -52,7 +52,7 @@ if { [template::form is_valid vote] } {
 
     # Check if the user is required to register.
     if { [string match "t" $require_registration_p] } {
-	ad_maybe_redirect_for_registration
+	auth::require_login
     }
 
     # If the user is logged in, check to see if they've
