@@ -1,0 +1,1 @@
+<formtemplate id="vote"></formtemplate>
