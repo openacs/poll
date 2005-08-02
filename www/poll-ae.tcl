@@ -4,6 +4,8 @@ ad_page_contract {
 
     @author Robert Locke (rlocke@infiniteinfo.com)
     @creation-date 2003-01-13
+
+    
 } {
     poll_id:naturalnum,optional
 }
@@ -109,13 +111,12 @@ if { [template::form is_request poll] } {
 if { [template::form is_valid poll] } {
     foreach field $fields {
 	set $field [template::element get_value poll $field]
-
 	if { [regexp {_p$} $field] } {
 	    if { [empty_string_p [set $field]] } {
 		set $field "f"
 	    }
 	}
-
+	
 	if { ![regexp {_date$} $field] } {
 	    lappend field_insert_list "p_$field => :$field"
             lappend field_insert_list_pg ":$field "
@@ -140,6 +141,9 @@ if { [template::form is_valid poll] } {
 	ad_require_permission $package_id create
 
 	if { ![db_string check_exists "select 1 from polls where poll_id = :poll_id" -default "0"] } {
+	    
+	    # NOTE: Change functions call since the user of $field_insert_list doesn't work 
+
 	    if { [catch {db_exec_plsql new_poll " " } ] } {
 		set db_error 1
 	    }

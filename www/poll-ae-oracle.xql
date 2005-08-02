@@ -6,12 +6,17 @@
 <fullquery name="new_poll">
 
       <querytext>
-      declare
+       declare
        id integer;
        begin
        id :=  poll.new(
                       p_poll_id => :poll_id,
-                      $field_insert_list,
+	              p_name => :name,
+	              p_question => :question,
+		      p_start_date => to_date(:start_date,'YYYY-MM-DD'),
+                      p_end_date =>  to_date(:end_date,'YYYY-MM-DD'),
+		      p_enabled => :enabled_p,
+		      p_require_registration_p => :require_registration_p,
                       p_package_id => :package_id,
                       p_creation_user => :user_id
          );
