@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 
-ad_require_permission $poll_id delete
+permission::require_permission -object_id $poll_id -privilege delete
 
 db_exec_plsql del_poll " "
 

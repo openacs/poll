@@ -9,7 +9,7 @@ ad_page_contract {
     choice_id:naturalnum
 }
 
-ad_require_permission $poll_id write
+permission::require_permission -object_id $poll_id -privilege write
 
 db_transaction {
     db_dml dec_sort "update poll_choices set sort_order = sort_order - 1

@@ -10,7 +10,7 @@ ad_page_contract {
     after:naturalnum,optional
 }
 
-ad_require_permission $poll_id write
+permission::require_permission -object_id $poll_id -privilege write
 
 #
 # 1) Set up the form.

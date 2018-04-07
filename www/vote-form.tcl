@@ -1,4 +1,4 @@
-ad_require_permission $poll_id read
+permission::require_permission -object_id $poll_id -privilege read
 
 #
 # 1) Generate the form for voting.

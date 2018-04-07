@@ -9,7 +9,7 @@ ad_page_contract {
     {voted:naturalnum 0}
 }
 
-ad_require_permission $poll_id read
+permission::require_permission -object_id $poll_id -privilege read
 
 #
 # Show the results.

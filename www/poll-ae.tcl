@@ -75,14 +75,14 @@ if { [template::form is_request poll] } {
     if { ![info exists poll_id] } {
 	# This is an insert.  Get the next sequence value
 	# for double-click protection.
-	ad_require_permission $package_id create
+	permission::require_permission -object_id $package_id -privilege create
 
 	set poll_id [db_nextval acs_object_id_seq]
 	set insert_p 1
 
 	template::element set_value poll enabled_p "t"
     } else {
-	ad_require_permission $poll_id write
+	permission::require_permission -object_id $poll_id -privilege write
 
 	# This is an update...
 	db_1row fetch_info "
@@ -138,7 +138,7 @@ if { [template::form is_valid poll] } {
     set db_error 0
 
     if { $insert_p } {
-	ad_require_permission $package_id create
+	permission::require_permission -object_id $package_id -privilege create
 
 	if { ![db_string check_exists "select 1 from polls where poll_id = :poll_id" -default "0"] } {
 	    
@@ -149,7 +149,7 @@ if { [template::form is_valid poll] } {
 	    }
 	}
     } else {
-	ad_require_permission $poll_id write
+	permission::require_permission -object_id $poll_id -privilege write
 
 	set sql "update polls set $field_update_list where poll_id = :poll_id"
   	if { [catch {db_dml edit_poll $sql}] } {
@@ -171,7 +171,7 @@ if { [template::form is_valid poll] } {
 if { ![set insert_p [template::element get_value poll insert_p]] } {
     set context Edit
 
-    set write_p [ad_permission_p $poll_id write]
+    set write_p [permission::permission_p -object_id $poll_id -privilege write]
 
     db_multirow -extend label_js poll_choices list_poll_choices {
 	select

@@ -13,7 +13,7 @@ set package_id [ad_conn package_id]
 set user_id    [ad_conn user_id]
 
 # Check if the user has the proper rights.
-set create_p [ad_permission_p $package_id create]
+set create_p [permission::permission_p -object_id $package_id -privilege create]
 
 #
 # List all the polls.
