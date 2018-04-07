@@ -22,7 +22,7 @@
 
 <p>
 
-<if @insert_p@ eq 0>
+<if @insert_p;literal@ false>
 
     <if @poll_choices:rowcount@ eq 0>
       <i>This poll currently has no choices.</i>
@@ -31,12 +31,12 @@
       Available choices for poll:
     </else>
       <ul>
-        <if @write_p@>
+        <if @write_p;literal@ true>
           <li><a href="poll_choice-ae?poll_id=@poll_id@&after=0">insert</a> a new poll choice.
         </if>
         <multiple name=poll_choices>
           <li>@poll_choices.label@
-	    <if @write_p@>
+	    <if @write_p;literal@ true>
 	      (<a href="poll_choice-ae?poll_id=@poll_id@&choice_id=@poll_choices.choice_id@">edit</a>
 	       | <a href="javascript:confirm_delete('@poll_choices.label_js@', '@poll_choices.votes@', 'poll_choice-delete?poll_id=@poll_id@&choice_id=@poll_choices.choice_id@')">delete</a>
 	       | <a href="poll_choice-ae?poll_id=@poll_id@&after=@poll_choices.sort_order@">insert after</a>

@@ -31,7 +31,7 @@
     </multiple>
       <tr>
 	  <td colspan=2 align="center"><b>@total@ total votes</b>
-		<if @admin_p@>(<a href="results-breakdown?poll_id=@poll_id@">breakdown</a>)</if>
+		<if @admin_p;literal@ true>(<a href="results-breakdown?poll_id=@poll_id@">breakdown</a>)</if>
 	  </td>
       </tr>
 </else>

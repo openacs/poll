@@ -23,26 +23,26 @@
 <else>
   <ul>
     <multiple name=polls>
-        <if @polls.archive_label_p@>
+        <if @polls.archive_label_p;literal@ true>
 	  </ul>
 	  <p><b>Archived/Future Polls</b>
 	  <ul>
 	</if>
 
-        <if @polls.disabled_label_p@>
+        <if @polls.disabled_label_p;literal@ true>
 	  </ul>
 	  <p><b>Disabled Polls</b>
 	  <ul>
 	</if>
 
       <li><a href="vote?poll_id=@polls.poll_id@">@polls.name@</a>: @polls.question@
-	<if @polls.edit_p@ or @polls.delete_p@>
+	<if @polls.edit_p;literal@ true or @polls.delete_p;literal@ true>
           (
-	    <if @polls.edit_p@>
+	    <if @polls.edit_p;literal@ true>
 	      <a href="poll-ae?poll_id=@polls.poll_id@">edit</a>
 	    </if>
-	    <if @polls.delete_p@>
-	        <if @polls.edit_p@>
+	    <if @polls.delete_p;literal@ true>
+	        <if @polls.edit_p;literal@ true>
 	      |
 		</if>
 	      <a href="javascript:confirm_delete('@polls.name_js@', '@polls.votes@', 'poll-delete?poll_id=@polls.poll_id@')">delete</a>
@@ -53,6 +53,6 @@
   </ul>
 </else>
 
-<if @create_p@>
+<if @create_p;literal@ true>
   <p><a href="poll-ae">Add</a> a new poll.
 </if>
